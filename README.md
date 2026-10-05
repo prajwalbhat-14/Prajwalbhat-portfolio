@@ -1,59 +1,21 @@
-# 🎬 Prajwal Bhat — Beyond the Frame
+# Prajwal Bhat — Beyond the Frame
 
-> **Where technology meets storytelling.**
+A responsive, standalone portfolio for GitHub Pages. It combines creative work, AI and data science projects, professional experience, education, certificates, and publications.
 
-Welcome to **Beyond the Frame**, my personal cinematic portfolio — a creative space that brings together two sides of my journey: **technology and storytelling**.
+## Publish with GitHub Pages
 
-The portfolio showcases my work and interests across:
+1. Upload the contents of this folder to the root of [`Prajwalbhat-portfolio`](https://github.com/prajwalbhat-14/Prajwalbhat-portfolio), keeping the `.github/workflows/deploy.yml` and `.nojekyll` files.
+2. Commit the upload to the `main` branch.
+3. In the repository, open **Settings → Pages** and select **GitHub Actions** as the build and deployment source if it is not already selected.
+4. The included workflow deploys the site on each push to `main`. When the first deployment succeeds, the public site will be available at:
 
-- 🎬 Acting & Filmmaking
-- 📹 YouTube & Creative Video Content
-- 🎭 Short Films & Mono Acting
-- 📸 Photography & Visual Storytelling
-- 🤖 Artificial Intelligence & Machine Learning
-- 📊 Data Science & Predictive Analytics
-- 💻 Software & AI Projects
-- 🧠 Generative AI & Emerging Technologies
+   <https://prajwalbhat-14.github.io/Prajwalbhat-portfolio/>
 
-## ✨ What You'll Find
+## Site files
 
-### 🎥 Creative World
-Explore my acting work, short films, trailers, creative videos, visual diary, movie posters, and selected work from my filmmaking journey.
-
-### 🤖 Tech World
-Discover my AI, Machine Learning, Data Science, and software projects, including projects involving:
-
-- Machine Learning
-- Graph Neural Networks
-- Generative AI
-- Natural Language Processing
-- Computer Vision
-- Data Analytics
-- AI-powered applications
-- Software & game development
-
-### 📁 Projects
-
-The portfolio connects directly to my GitHub repositories, allowing visitors to explore the projects behind my technical journey.
-
-### 📄 Resumes
-
-The website includes both my:
-
-- Professional / Technology Resume
-- Movie / Acting Resume
-
-## 🌐 Connect With Me
-
-- **LinkedIn:** [Prajwal Bhat](https://www.linkedin.com/in/prajwal-bhat-b7b13b1bb)
-- **GitHub:** [prajwalbhat-14](https://github.com/prajwalbhat-14)
-- **Instagram:** [@prajwalbhat_14](https://www.instagram.com/prajwalbhat_14/)
-- **YouTube:** [Prajwal Bhat](https://youtube.com/@prajwalbhat14)
-
----
-
-### 🎞️ Beyond the Frame
-
-**One frame can tell a story.  
-One idea can become technology.  
-This portfolio is where both meet.**
+- `index.html` — self-contained portfolio page
+- `resume.pdf` — professional resume
+- `movie-resume.pdf` — acting and filmmaking resume
+- `assets/` — portfolio images
+- `.github/workflows/deploy.yml` — GitHub Pages deployment workflow
+- `.nojekyll` — tells Pages to serve static files without Jekyll processing
