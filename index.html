@@ -580,7 +580,7 @@ const loader=document.getElementById('loader');
 window.addEventListener('load',()=>setTimeout(()=>loader?.classList.add('done'),900));
 const wipe=document.getElementById('wipe');
 document.querySelectorAll('.transition-link').forEach(a=>a.addEventListener('click',e=>{const href=a.getAttribute('href');if(!href?.startsWith('#'))return;e.preventDefault();wipe?.classList.remove('active');void wipe?.offsetWidth;wipe?.classList.add('active');setTimeout(()=>document.querySelector(href)?.scrollIntoView({behavior:'smooth'}),280)}));
-const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0});
 document.querySelectorAll('.reveal,.section,.project-card,.timeline-item,.poster-card,.feature-wrap,.archive-head,.video-head,.video-layout,.insta-copy,.insta-mosaic,.tech-intro,.resume-strip,.contact-inner').forEach(el=>{el.classList.add('reveal');revealObserver.observe(el)});
 const chapters=[...document.querySelectorAll('[data-chapter]')],chapterCount=Math.max(...chapters.map(x=>Number(x.dataset.chapter||1))),chapterNo=document.getElementById('chapterNo'),railFill=document.getElementById('railFill');
 document.querySelector('.rail-bottom').textContent=String(chapterCount).padStart(2,'0');
