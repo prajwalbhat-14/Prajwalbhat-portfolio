@@ -427,10 +427,15 @@ main,main>section{width:100%;max-width:100%}
 .cinema-spotlight{position:relative;isolation:isolate}
 .cinema-spotlight::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;background:radial-gradient(260px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(226,27,45,.16),transparent 76%);transition:opacity .25s ease}
 .cinema-spotlight:hover::after{opacity:1}
+.cinema-tilt{rotate:var(--tilt-x,0) var(--tilt-y,0) 0 1deg;transition:rotate .24s ease;will-change:rotate}
+.cinema-magnetic{translate:var(--mag-x,0px) var(--mag-y,0px);transition:translate .2s ease}
+.cinema-pressable{transition:scale .18s ease}
+.cinema-pressable:active{scale:.96}
+.poster-card.cinema-spotlight::after,.diary-card.cinema-spotlight::after{background:radial-gradient(280px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(226,27,45,.22),transparent 76%)}
 .desktop-nav a.chapter-active{color:#fff}
 .desktop-nav a.chapter-active::after{content:"";display:block;height:1px;margin-top:5px;background:var(--red);animation:chapter-mark .3s ease both}
 @keyframes chapter-mark{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
-@media(prefers-reduced-motion:reduce){.film-progress span,.cinema-reveal,.cinema-reveal.cinema-visible,.timeline-item.cinema-reveal,.timeline-item.cinema-reveal.cinema-visible,.cinema-spotlight::after,.desktop-nav a.chapter-active::after{transition:none!important;animation:none!important;filter:none!important;transform:none!important;scroll-behavior:auto!important}.cinema-reveal{opacity:1!important}}
+@media(prefers-reduced-motion:reduce){.film-progress span,.cinema-reveal,.cinema-reveal.cinema-visible,.timeline-item.cinema-reveal,.timeline-item.cinema-reveal.cinema-visible,.cinema-spotlight::after,.cinema-tilt,.cinema-magnetic,.cinema-pressable,.desktop-nav a.chapter-active::after{transition:none!important;animation:none!important;filter:none!important;transform:none!important;rotate:none!important;translate:none!important;scale:none!important;scroll-behavior:auto!important}.cinema-reveal{opacity:1!important}}
 </style>
 </head>
 <body>
@@ -713,16 +718,39 @@ const mobileMenu=document.getElementById('mobileMenu');const menuBtn=document.ge
     chapters.forEach(chapter=>chapterObserver.observe(chapter));
   }
 
+  document.querySelectorAll('.button,.menu-btn,.poster-card,.certificate-link')
+    .forEach(element=>element.classList.add('cinema-pressable'));
+
   if(!reducedMotion&&window.matchMedia('(hover: hover) and (pointer: fine)').matches){
-    document.querySelectorAll('.project-card,.poster-card,.diary-card,.education-card,.certificate-link')
+    document.querySelectorAll('.project-card,.poster-card,.diary-card,.education-card,.certificate-link,.hero-photo')
       .forEach(card=>{
-        card.classList.add('cinema-spotlight');
+        card.classList.add('cinema-spotlight','cinema-tilt');
         card.addEventListener('pointermove',event=>{
           const bounds=card.getBoundingClientRect();
+          const x=(event.clientX-bounds.left)/bounds.width-.5;
+          const y=(event.clientY-bounds.top)/bounds.height-.5;
           card.style.setProperty('--spot-x',`${event.clientX-bounds.left}px`);
           card.style.setProperty('--spot-y',`${event.clientY-bounds.top}px`);
+          card.style.setProperty('--tilt-x',`${-y*.9}`);
+          card.style.setProperty('--tilt-y',`${x*.9}`);
+        });
+        card.addEventListener('pointerleave',()=>{
+          card.style.setProperty('--tilt-x','0');
+          card.style.setProperty('--tilt-y','0');
         });
       });
+    document.querySelectorAll('.button,.mini-cta,.menu-btn').forEach(button=>{
+      button.classList.add('cinema-magnetic');
+      button.addEventListener('pointermove',event=>{
+        const bounds=button.getBoundingClientRect();
+        button.style.setProperty('--mag-x',`${((event.clientX-bounds.left)/bounds.width-.5)*5}px`);
+        button.style.setProperty('--mag-y',`${((event.clientY-bounds.top)/bounds.height-.5)*5}px`);
+      });
+      button.addEventListener('pointerleave',()=>{
+        button.style.setProperty('--mag-x','0px');
+        button.style.setProperty('--mag-y','0px');
+      });
+    });
   }
 })();
 </script>
